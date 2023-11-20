@@ -3,7 +3,18 @@ package PoolGame.utils;
 import PoolGame.GameObjects.Ball;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
+
+/**
+ * 工具类
+ * 提供球碰撞后的速度计算
+ */
 public class util {
+
+    /**
+     * 碰撞函数的包装函数
+     * @param A 球A
+     * @param B 球B
+     */
     public static void processBall2BallCollision(Ball A, Ball B){
         Point2D positionA = new Point2D(A.getXPos(),A.getYPos());
         Point2D positionB = new Point2D(B.getXPos(),B.getYPos());
@@ -21,6 +32,16 @@ public class util {
         B.setYVel(velocityBNew.getY());
 
     }
+
+    /**
+     * @param positionA  球A位置 2D
+     * @param velocityA  球A速度 2D
+     * @param massA      球A质量 double
+     * @param positionB  球B位置 2D
+     * @param velocityB  球B速度 2D
+     * @param massB      球B质量 double
+     * @return           碰撞后 -> [A速度(2D), B速度(2D)]
+     */
     private static Pair<Point2D, Point2D> calculateCollision(Point2D positionA, Point2D velocityA, double massA, Point2D positionB, Point2D velocityB, double massB) {
 
         // Find the angle of the collision - basically where is ball B relative to ball A. We aren't concerned with

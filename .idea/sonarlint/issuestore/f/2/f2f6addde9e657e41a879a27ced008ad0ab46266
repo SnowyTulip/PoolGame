@@ -1,0 +1,7 @@
+
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ƒŒÍøÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(à½…†ùÿÿÿÿ
+l	java:S116"WRename this field "PocketRadius" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ğ§í
+7
+java:S1170"!Make this final field static too.(Ğ§í
+c	java:S100)"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıéŸ

@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Optional;
 
 
+/**
+ * Game 实例
+ */
 public class Game {
 
 
@@ -34,11 +37,19 @@ public class Game {
     private final Balls balls;
     private final Table table;
     private final Canvas canvas;
+    // 策略模式上下文
     private final GameStrategyContext fGameStrategyContext;
     private final Drawable rootDrawables = new DummyDrawable();
+    // 所有球
     private List<Movable> movables;
-    @SuppressWarnings("FieldMayBeFinal")
-    private List<Ball> BallsToRemove;
+    /* 待删除列表 ballsToRemove
+     * 因为我们无法在遍历数组的时候删除球,我们允许它跑完当次循环
+     * 在循环时将需要删除的球添加到ballsToRemove中
+     * 循环结束后我们将需要删除的球删除
+     * @see #scheduleToRemove(Ball ball)
+    */
+
+    private List<Ball> ballsToRemove;
 
     public Game(Canvas canvas){
         BaseConfigFactory tableFactory = new TableFactory();
@@ -47,10 +58,11 @@ public class Game {
         balls = (Balls) ballsFactory.CreateGameObject();
         this.canvas = canvas;
         movables = balls.getBalls();
-        BallsToRemove = new ArrayList<>();
+        ballsToRemove = new ArrayList<>();
         status = GameStatus.start;
         this.canvas.setFocusTraversable(true);
         this.canvas.requestFocus();
+        //在此处添加了功能,点击“Ctrl+F” 也可以重置游戏
         this.canvas.setOnKeyPressed(event -> {
             if (event.isControlDown() && event.getCode() == KeyCode.F) {
                 this.status = GameStatus.reset;
@@ -102,18 +114,25 @@ public class Game {
 
     public void addDrawables(Group root) {
         ObservableList<Node> groupChildren = root.getChildren();
-        // TODO: Add drawable game objects to group calling Drawable::addToGroup(groupChildren)
         table.addToGroup(groupChildren);
         balls.addToGroup(groupChildren);
         rootDrawables.addToGroup(groupChildren);
 
     }
+
+    /**
+     * @param ball 需要移除的球
+     */
     public void scheduleToRemove(Ball ball){
-        this.BallsToRemove.add(ball);
+        this.ballsToRemove.add(ball);
     }
+
+    /**
+     * 循环结束后将球移除,实际上需要移除this.movables中的ball
+     */
     public void removeBalls(){
-        this.movables.removeAll(this.BallsToRemove);
-        this.BallsToRemove.clear();
+        this.movables.removeAll(this.ballsToRemove);
+        this.ballsToRemove.clear();
     }
     private void processBallFallIntoPocket(Ball ball){
         GameColor Color = ball.getColor();
@@ -129,7 +148,7 @@ public class Game {
         //判断完成进球后需要判断一下是否该游戏结束了
         //只要目前桌子上仅有一个球，并且他是白球，直接游戏成功
         List<Movable> TempBalls = new ArrayList<>(this.movables);
-        TempBalls.removeAll(this.BallsToRemove);
+        TempBalls.removeAll(this.ballsToRemove);
         if(TempBalls.size() == 1 &&
                 ((Ball) TempBalls.get(0)).getColor() == GameColor.white ){
             strategy = new LastBallFallIntoPocket();
@@ -139,16 +158,20 @@ public class Game {
     }
     // tick() is called every frame, handle main game logic here
     public void tick() {
-        // TODO: Implement game logic
         if(status == GameStatus.start) {
+            //先移动球        move()
+            //根据摩擦力减速球 slowDownForFriction()
+            //处理碰撞        handleCollision()
+            //判断是否进球     DoPocketBehave()
+            //如果进球使用策略  processBallFallIntoPocket()
             for (Movable movable : movables) {
                 movable.move();
                 movable.slowDownForFriction(table.getFriction());
                 movable.handleCollision(movables, table.getBounds());
                 Boolean isFallIntoPocket = movable.DoPocketBehave(table.getPockets());
-                if (isFallIntoPocket)
-                    processBallFallIntoPocket((Ball) movable);
+                if (isFallIntoPocket) processBallFallIntoPocket((Ball) movable);
             }
+            //移除球
             removeBalls();
         } else if (status == GameStatus.reset) {
             resetGame();

@@ -1,0 +1,12 @@
+
+`	java:S1127"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112Y"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+k	java:S117]"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( ²¦²ûÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬Ø¤œùÿÿÿÿ
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(º÷éá8ı§İß¾1
+a
+java:S21474"DCombine this catch with the one at line 50, which has the same body.(ï­£Ä8¨İß¾1
+a
+java:S2147V"DCombine this catch with the one at line 84, which has the same body.(ï­£Ä8†¨İß¾1
+E	java:S108l")Either remove or fill this block of code.(üØô8‰¨İß¾1
+X	java:S125w"<This block of commented-out lines of code should be removed.(Ä¨•¾8Š¨İß¾1

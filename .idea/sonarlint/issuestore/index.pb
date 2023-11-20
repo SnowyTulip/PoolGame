@@ -10,10 +10,6 @@ X
 L
 .idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
 Å
-Q.idea/sonarlint/securityhotspotstore/f/0/f07866736216be0ee2aba49e392191aeae700a35,2\5\25f6469773b9f3ebb994178c1114a60412389f58
-Å
-Q.idea/sonarlint/securityhotspotstore/5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9,1\e\1e45613b6060de813dc92caeb118e08a2124bc35
-Å
 Q.idea/sonarlint/securityhotspotstore/d/d/dd7b3350c29c49497756c7f32c69a3bed18b1cba,b\3\b31df9b2b9cdd37f5ca3f5303feabf564eeaaf4e
 Å
 Q.idea/sonarlint/securityhotspotstore/9/f/9fe84ebb15faf917b7def6236dba604453cc61e0,b\b\bbf202272a96de5cd6b6828ffdc55fb3ce45289c
@@ -27,20 +23,12 @@ Q.idea/sonarlint/securityhotspotstore/f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b5723
 Q.idea/sonarlint/securityhotspotstore/6/e/6ecd6000a7b6f4a2884412ff19f74193ed089648,4\2\42f7c266cbd4ce558ab6bb86ba595325ed88080c
 w
 G.idea/sonarlint/issuestore/f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e,5\2\52114fdaa426e9b83a3c5df4e11c4f0ebbcd814b
-w
-G.idea/sonarlint/issuestore/5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9,f\7\f7819ea138c33fec28e7e536cb2de34db38fc121
 \
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
-w
-G.idea/sonarlint/issuestore/f/0/f07866736216be0ee2aba49e392191aeae700a35,b\f\bfb9453d49af9bc40f5f7a5f034be3c7ef8fa6bf
 w
 G.idea/sonarlint/issuestore/6/e/6ecd6000a7b6f4a2884412ff19f74193ed089648,3\8\38464f72ef55196e32fe4dfbcc50f1cda5f4cb5d
 w
 G.idea/sonarlint/issuestore/9/f/9fe84ebb15faf917b7def6236dba604453cc61e0,f\0\f0e0f9cec86fe4b939ae22be5264c758801eb28f
-Å
-Q.idea/sonarlint/securityhotspotstore/2/a/2a45a911a8f1836b0b6c5b758962572012d8f8c3,1\0\1017d171139053a6ceaff055b7159ba14e80dc44
-w
-G.idea/sonarlint/issuestore/2/a/2a45a911a8f1836b0b6c5b758962572012d8f8c3,9\a\9aed88f31eac276604c6355c1adcc0bce1f80fd6
 w
 G.idea/sonarlint/issuestore/8/8/88a9255124c95bdc913197c120a8d560edc59c8e,a\e\ae9ddf453f55affea2d6b9e3973cac1eb2efb4e1
 O
@@ -63,3 +51,21 @@ h
 8src/main/java/PoolGame/Strategy/IBallPocketStrategy.java,1\a\1aaa625c31cc124d2b8e3fd5575bcdab765f200f
 k
 ;src/main/java/PoolGame/Strategy/LastBallFallIntoPocket.java,2\0\206f7052ea3d9b4f9892f838f9fb2a5e7d51da49
+Q
+!src/main/java/PoolGame/Start.java,b\7\b7b773ad04f3421e5fef578736c7eeb291e33ce6
+p
+@src/main/java/PoolGame/configBuildFactory/BaseConfigFactory.java,c\9\c9b783fc8e24732acb0cae526842187561345c74
+\
+,src/main/java/PoolGame/GameObjects/Ball.java,a\8\a854fea360a0dfc6944b1632c0dcba0bc897bf6f
+]
+-src/main/java/PoolGame/GameObjects/Balls.java,1\6\169fd7150f88429b288eb495bf0b4fe448c8dc46
+]
+-src/main/java/PoolGame/GameObjects/Table.java,f\2\f2f6addde9e657e41a879a27ced008ad0ab46266
+k
+;src/main/java/PoolGame/Strategy/BlueBallFallIntoPocket.java,7\9\7958b08be71765f06a388a6960f0fb4b927301a8
+j
+:src/main/java/PoolGame/Strategy/RedBallFallIntoPocket.java,a\2\a2fcf4ba796caa3668dd398dcf2be90bd2043abc
+l
+<src/main/java/PoolGame/Strategy/WhiteBallFallIntoPocket.java,4\8\486234e023f1d772c128d27036d96eaa56f3366f
+P
+ src/main/java/PoolGame/Game.java,e\9\e9c81eb4b9df42d0a0ba1a31bccd2bc2b7f910d3

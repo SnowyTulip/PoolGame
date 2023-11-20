@@ -187,24 +187,38 @@ public class Ball implements Drawable, Movable {
         setYPos(yPos);
     }
 
+    /**
+     * 此函数会根据摩擦力减少球的速度
+     * 根据物理学的知识
+     * @param friction 来自table对象的摩擦力
+     */
     @Override
     public void slowDownForFriction(double friction) {
         this.friction = friction;
         double dt = 1;
         double Ff = this.friction * fMass * 0.1;//ignore g
         double V = sqrt(fVelX*fVelX + fVelY*fVelY);
-        //if v is zero just return
+        //当速度为0的时候应当不做任何处理返回
+        //注意,速度可以小于0,因为矢量表示
         if(V == 0)return;
         double Fx = Ff * fVelX / V;
         double Fy = Ff * fVelY / V;
         // V' = V - a*t
         double newVelX = fVelX - (Fx / fMass) * dt;
         double newVelY = fVelY - (Fy / fMass) * dt;
-        // if next tick is zero,just stop it
+        // if next tick is zero,just stop it,中英混用
         fVelX = newVelX * fVelX <= 0 ? 0 : newVelX;
         fVelY = newVelY * fVelY <= 0 ? 0 : newVelY;
     }
 
+    /**
+     * 处理碰撞的函数
+     * 前半部分是处理球与球桌边缘的碰撞
+     * 然后调用助教提供的碰撞函数(defined in util.java)处理碰撞
+     * note: 应该为球添加一个标记.以减少重复的计算
+     * @param movables 球
+     * @param tableBounds 桌子边缘的Bounds对象
+     */
     @Override
     public void handleCollision(List<Movable> movables,Bounds tableBounds) {
         Bounds ballBounds = this.getNode().getBoundsInLocal();
@@ -232,12 +246,26 @@ public class Ball implements Drawable, Movable {
             }
         }
     }
+
+    /**
+     * 实际上此函数有缺失,仅仅只是让球不可见
+     * 让球不在发生碰撞的逻辑定义在Game.java中，将球直接删除
+     * @param enable 设置球是否可用
+     */
     public void setEnable(Boolean enable){
         this.shape.setVisible(enable);
     }
     public int getCountOfFallIntoPocket(){
         return this.CountOfFallIntoPocket;
     }
+
+    /**
+     * 此处是判断球是否会进入球洞
+     * 具体球的落入球洞的行为在策略类中定义
+     * note:实际上不应该在此处对球进洞的次数做更改，而是仅判断是否进球
+     * @param pockets 球洞集合
+     * @return 是否进球洞
+     */
     @Override
     public Boolean DoPocketBehave(List<Circle> pockets) {
         boolean fallIntoPockets = false;
@@ -263,9 +291,24 @@ public class Ball implements Drawable, Movable {
     public Boolean AllowHit(){
         return this.fcolor == GameColor.white;
     }
+
+    /**
+     * 缩放        Vx' = Vx / Max(Vel**0.5 , 1)
+     * @param Vel 总体速度 Vel = sqrt(Vx*Vx + Vy*Vy)
+     * @param Vx  X方向速度
+     * @return    缩放后的Vx‘
+     */
     public double scaleVel(double Vel,double Vx){
         return Vx/ Math.max(Math.pow(Vel,0.5),1);
     }
+
+    /**
+     * 绑定鼠标事件
+     * 策略:
+     *     +当用户拖拽鼠标时 -> 绘制球中心到鼠标的实线辅助线
+     *     +当用户拖拽鼠标时 -> 计算球可能会被打击的位置,绘制虚线辅助线
+     * 计算公式见高中物理必修1
+     */
     public void registerMouseAction() {
         this.shape.setOnMousePressed(e -> {
             //球杆击中球采用这个
@@ -274,6 +317,7 @@ public class Ball implements Drawable, Movable {
 //            System.out.println("Relative is" + "(" + dragRelativeX + "," + dragRelativeY + ")");
         });
         this.shape.setOnMouseDragged(e -> {
+            //isStop : 只有白球停止才允许下一次击球
             if(isStop()) {
                 this.DragLine.setStartX(this.shape.getCenterX());
                 this.DragLine.setStartY(this.shape.getCenterY());
@@ -289,7 +333,6 @@ public class Ball implements Drawable, Movable {
                 Vx = scaleVel(V,Vx);
                 Vy = scaleVel(V,Vy);
                 V  = Math.sqrt(Vx*Vx + Vy*Vy);
-
                 double Dx = Vx * V / (2 * friction * 0.1) ;
                 double Dy = Vy * V / (2 * friction * 0.1) ;
                 this.DashLine.setStartX(this.shape.getCenterX());

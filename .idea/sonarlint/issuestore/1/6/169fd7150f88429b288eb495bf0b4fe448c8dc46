@@ -1,0 +1,8 @@
+
+*
+java:S1700"Rename field "balls"(Ó—§Œ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(à½…†ùÿÿÿÿ
+m
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(«êæ×ûÿÿÿÿ
+[
+java:S1612"@Replace this lambda with method reference 'Movable.class::cast'.(«êæ×ûÿÿÿÿ

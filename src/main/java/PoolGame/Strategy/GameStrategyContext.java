@@ -3,6 +3,10 @@ package PoolGame.Strategy;
 import PoolGame.Game;
 import PoolGame.GameObjects.Ball;
 
+/**
+ * 策略上下文
+ * 这是策略模式的要求
+ */
 public class GameStrategyContext {
     private IBallPocketStrategy strategy;
     public void setStrategy(IBallPocketStrategy strategy){

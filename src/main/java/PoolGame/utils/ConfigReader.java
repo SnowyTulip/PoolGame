@@ -16,6 +16,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
+/**
+ * 使用助教提供的ConfigReader.java中的 parse()函数进行修改
+ * 从配置文件中读取table和球的配置
+ */
 public class ConfigReader {
 
     public static final String  configPath = "src/main/resources/config.json";

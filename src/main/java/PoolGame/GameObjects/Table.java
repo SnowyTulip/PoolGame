@@ -13,6 +13,9 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Table类 表示桌面
+ */
 public class Table implements GameObject , Drawable {
     private final GameColor fcolor;
     private final double friction;
@@ -29,6 +32,12 @@ public class Table implements GameObject , Drawable {
         tableBounds = shape.getBoundsInLocal();
         InitPockets(sizeX,sizeY);
     }
+
+    /**
+     * 根据球桌大小放置6个球洞
+     * @param sizeX 球桌的长
+     * @param sizeY 球桌的宽
+     */
     private void InitPockets(long sizeX,long sizeY){
         pockets = new ArrayList<>();
         pockets.add(new Circle(0,0,PocketRadius));
