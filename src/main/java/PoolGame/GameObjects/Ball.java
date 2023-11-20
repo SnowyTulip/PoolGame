@@ -15,13 +15,25 @@ import java.util.List;
 
 import static java.lang.Math.sqrt;
 
+/**
+ * Ball 对象,用来表示单个球对象
+ * + 位置信息
+ * + 速度
+ * + 颜色、质量、进球次数
+ * + 球的行为
+ * --Builder: 内部类实现建造者模式
+ * --建造时使用连续调用方式
+ */
 public class Ball implements Drawable, Movable {
     private final GameColor fcolor;
+    //初始速度、位置信息
     private final double initialPosX;
     private final double initialPosY;
     private final double initalVelX;
     private final double initalVelY;
+    //进球次数记录(用于蓝色球的复位)
     private int CountOfFallIntoPocket;
+    //基本属性
     private double fVelX;
     private double fVelY;
     private final double fMass;
@@ -29,9 +41,13 @@ public class Ball implements Drawable, Movable {
     private static final double Radius = 15.0;
     //打击的缩放系数
     private final double hitScale = 0.1;
+    //拖动白球后形成的拖拽线
+    //实线
     private final Line  DragLine;
+    //虚线:表示球将会抵达的位置
     private final Line  DashLine;
     private double friction = 1;
+
     public static class Builder{
         private GameColor fcolor;
         private double fPosX;
@@ -89,7 +105,7 @@ public class Ball implements Drawable, Movable {
         this.DashLine.setVisible(false);
         this.DashLine.getStrokeDashArray().addAll(5d,5d);
         this.DashLine.setFill(Color.color(1,1,1));
-
+        //使用此函数注册鼠标拖动球时的行为
         if(AllowHit()) registerMouseAction();
     }
     @Override
@@ -255,7 +271,6 @@ public class Ball implements Drawable, Movable {
             //球杆击中球采用这个
 //            dragRelativeX = e.getSceneX();
 //            dragRelativeY = e.getSceneY();
-            //TODO 判断鼠标点是否在合理的范围内
 //            System.out.println("Relative is" + "(" + dragRelativeX + "," + dragRelativeY + ")");
         });
         this.shape.setOnMouseDragged(e -> {
