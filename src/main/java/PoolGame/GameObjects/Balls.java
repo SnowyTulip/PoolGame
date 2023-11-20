@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Balls implements GameObject {
+    @SuppressWarnings("FieldMayBeFinal")
     private List<Ball> balls = new ArrayList<>();
 
     public void addBall(Ball ball) {

@@ -25,18 +25,20 @@ import java.util.Optional;
 
 
 public class Game {
+
+
     enum GameStatus{
-        start,reset,success,fail
-    };
+        start,reset, @SuppressWarnings("unused") success, @SuppressWarnings("unused") fail
+    }
     private GameStatus status;
-    private  Balls balls;
-    private  Table table;
+    private final Balls balls;
+    private final Table table;
     private final Canvas canvas;
-    private final double[] canvasDim = {0.0, 0.0};
     private final GameStrategyContext fGameStrategyContext;
-    private Drawable rootDrawables = new DummyDrawable();
-    private List<Movable> movables = List.of();
-    private List<Ball> BallsToRemove = List.of();
+    private final Drawable rootDrawables = new DummyDrawable();
+    private List<Movable> movables;
+    @SuppressWarnings("FieldMayBeFinal")
+    private List<Ball> BallsToRemove;
 
     public Game(Canvas canvas){
         BaseConfigFactory tableFactory = new TableFactory();
@@ -45,11 +47,11 @@ public class Game {
         balls = (Balls) ballsFactory.CreateGameObject();
         this.canvas = canvas;
         movables = balls.getBalls();
-        BallsToRemove = new ArrayList<Ball>();
+        BallsToRemove = new ArrayList<>();
         status = GameStatus.start;
-        canvas.setFocusTraversable(true);
-        canvas.requestFocus();
-        canvas.setOnKeyPressed(event -> {
+        this.canvas.setFocusTraversable(true);
+        this.canvas.requestFocus();
+        this.canvas.setOnKeyPressed(event -> {
             if (event.isControlDown() && event.getCode() == KeyCode.F) {
                 this.status = GameStatus.reset;
             }

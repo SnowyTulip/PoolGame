@@ -1,4 +1,5 @@
 package PoolGame.utils;
+
 import PoolGame.GameObjects.Ball;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
@@ -14,25 +15,11 @@ public class util {
 
         Point2D velocityANew = res.getKey();
         Point2D velocityBNew = res.getValue();
-        double a1 = checkEnige(A,B);
         A.setXVel(velocityANew.getX());
         A.setYVel(velocityANew.getY());
         B.setXVel(velocityBNew.getX());
         B.setYVel(velocityBNew.getY());
-        double a2 = checkEnige(A,B);
-        if(a1 != a2)
-            System.out.println("a1:" + a1 + " a2:" + a2);
 
-    }
-    private static double checkEnige(Ball A,Ball B){
-        double ax = A.getXVel();
-        double ay = A.getYVel();
-        double bx = B.getXVel();
-        double by = B.getYVel();
-        double va = Math.sqrt(ax * ax + ay * ay);
-        double vb = Math.sqrt(bx * bx + by * by);
-        double res = va*va + vb*vb;
-        return res;
     }
     private static Pair<Point2D, Point2D> calculateCollision(Point2D positionA, Point2D velocityA, double massA, Point2D positionB, Point2D velocityB, double massB) {
 

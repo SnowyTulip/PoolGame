@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
 public class ConfigReader {
 
     public static final String  configPath = "src/main/resources/config.json";
@@ -43,7 +44,6 @@ public class ConfigReader {
 
             table = new Table(tableGameColor,tableFriction,tableX,tableY);
         } catch (FileNotFoundException e) {
-            System.out.println("no such a file");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +70,6 @@ public class ConfigReader {
                 Double velocityX = (Double) ((JSONObject) jsonBall.get(VEL_FILED)).get(X_FILED);
                 Double velocityY = (Double) ((JSONObject) jsonBall.get(VEL_FILED)).get(Y_FILED);
                 Double mass = (Double) jsonBall.get(MASS_FILED);
-                //FIXME 添加建造者模式
                 Ball ball = new Ball.Builder()
                         .setColor(gameColor)
                         .setPosX(positionX).setPosY(positionY)
@@ -79,7 +78,6 @@ public class ConfigReader {
                 balls.addBall(ball);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("no such a file");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,11 +88,21 @@ public class ConfigReader {
     }
     public static GameColor getColor(String ColorStr){
         String ops = ColorStr.toLowerCase();
-        switch (ops){
-            case "white":return GameColor.white;
-            case "red"  :return GameColor.red;
-            case "blue" :return GameColor.blue;
-            case "green":return GameColor.green;
+        switch (ops) {
+            case "white" -> {
+                return GameColor.white;
+            }
+            case "red" -> {
+                return GameColor.red;
+            }
+            case "blue" -> {
+                return GameColor.blue;
+            }
+            case "green" -> {
+                return GameColor.green;
+            }
+            default -> {
+            }
         }
         return null;
     }
@@ -104,12 +112,12 @@ public class ConfigReader {
         // if a command line argument is provided, that should be used as the path
         // if not, you can hard-code a default. e.g. "src/main/resources/config.json"
         // this makes it easier to test your program with different config files
-        String configPath;
-        if (args.length > 0) {
-            configPath = args[0];
-        } else {
-            configPath = "src/main/resources/config.json";
-        }
+//        String configPath;
+//        if (args.length > 0) {
+//            configPath = args[0];
+//        } else {
+//            configPath = "src/main/resources/config.json";
+//        }
     }
 
 }

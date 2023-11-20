@@ -2,7 +2,6 @@ package PoolGame.Strategy;
 
 import PoolGame.Game;
 import PoolGame.GameObjects.Ball;
-import PoolGame.IObject.GameColor;
 
 public class LastBallFallIntoPocket implements IBallPocketStrategy{
     @Override

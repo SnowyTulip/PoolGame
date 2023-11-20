@@ -1,7 +1,7 @@
 package PoolGame.GameObjects;
 
-import PoolGame.IObject.GameColor;
 import PoolGame.IObject.Drawable;
+import PoolGame.IObject.GameColor;
 import PoolGame.IObject.Movable;
 import PoolGame.utils.util;
 import javafx.collections.ObservableList;
@@ -12,13 +12,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-import static java.lang.Math.signum;
 import static java.lang.Math.sqrt;
 
 public class Ball implements Drawable, Movable {
-    private GameColor fcolor;
+    private final GameColor fcolor;
     private final double initialPosX;
     private final double initialPosY;
     private final double initalVelX;
@@ -26,13 +24,13 @@ public class Ball implements Drawable, Movable {
     private int CountOfFallIntoPocket;
     private double fVelX;
     private double fVelY;
-    private double fMass;
+    private final double fMass;
     private final Circle shape;
     private static final double Radius = 15.0;
     //打击的缩放系数
-    private double hitScale = 0.1;
-    private Line  DragLine;
-    private Line  DashLine;
+    private final double hitScale = 0.1;
+    private final Line  DragLine;
+    private final Line  DashLine;
     private double friction = 1;
     public static class Builder{
         private GameColor fcolor;
@@ -43,8 +41,6 @@ public class Ball implements Drawable, Movable {
         private double fVelY;
         private double fMass;
         //都是必选参数
-        public Builder(){
-        }
         public Builder setColor(GameColor gameColor){
             this.fcolor = gameColor;
             return this;
@@ -214,12 +210,6 @@ public class Ball implements Drawable, Movable {
         }
         for (Movable other :movables) {
             if(other == this) continue;
-//            double dx = other.getXPos() - getXPos();
-//            double dy = other.getYPos() - getYPos();
-//            double distance = Math.sqrt(dx * dx + dy * dy);
-//            if(distance < Radius + ((Ball) other).Radius){
-//                util.processBall2BallCollision(this, (Ball) other);
-//            }
             Bounds otherBounds = ((Ball) other).getNode().getBoundsInLocal();
             if (ballBounds.intersects(otherBounds)) {
                 util.processBall2BallCollision(this, (Ball) other);
@@ -255,16 +245,12 @@ public class Ball implements Drawable, Movable {
     }
 
     public Boolean AllowHit(){
-        Boolean res = false;
-        if(this.fcolor == GameColor.white)
-            res  = true;
-        return res;
+        return this.fcolor == GameColor.white;
     }
     public double scaleVel(double Vel,double Vx){
         return Vx/ Math.max(Math.pow(Vel,0.5),1);
     }
     public void registerMouseAction() {
-        AtomicBoolean LetUSGo = new AtomicBoolean(true);
         this.shape.setOnMousePressed(e -> {
             //球杆击中球采用这个
 //            dragRelativeX = e.getSceneX();

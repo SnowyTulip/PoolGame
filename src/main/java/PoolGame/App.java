@@ -1,13 +1,12 @@
 package PoolGame;
 
-import PoolGame.utils.ConfigReader;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.canvas.Canvas;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class App  extends Application{
@@ -19,7 +18,7 @@ public class App  extends Application{
 
 
 //    @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         Group root = new Group();
         Scene scene = new Scene(root);
 
@@ -44,9 +43,7 @@ public class App  extends Application{
     }
 
     public static void main(String[] args) {
-        ConfigReader.main(args);
         launch(args);
-        System.out.println("asdqwe");
     }
 
 }
