@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeType;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class Ball implements Drawable, Movable {
     private final Line  DragLine;
     //虚线:表示球将会抵达的位置
     private final Line  DashLine;
+    private Circle Dashshape;
     private double friction = 1;
 
     public static class Builder{
@@ -106,7 +108,7 @@ public class Ball implements Drawable, Movable {
         this.DashLine.getStrokeDashArray().addAll(5d,5d);
         this.DashLine.setFill(Color.color(1,1,1));
         //使用此函数注册鼠标拖动球时的行为
-        if(AllowHit()) registerMouseAction();
+        if(AllowHit()) {registerMouseAction();}
     }
     @Override
     public Node getNode() {
@@ -118,6 +120,16 @@ public class Ball implements Drawable, Movable {
         group.add(this.shape);
         group.add(this.DragLine);
         group.add(this.DashLine);
+        genDashBall(group);
+    }
+    private void genDashBall(ObservableList<Node> group){
+        this.Dashshape = new Circle(0,0,Radius);
+        this.Dashshape.setStrokeType(StrokeType.CENTERED);
+        this.Dashshape.setStrokeWidth(2);
+        this.Dashshape.getStrokeDashArray().addAll(5d, 10d); // 设置虚线样式
+        this.Dashshape.setVisible(false);
+        this.Dashshape.setFill(Color.WHITE);
+        group.add(this.Dashshape);
     }
     public void goBackToInitialPosition(){
         this.shape.setCenterX(this.initialPosX);
@@ -309,7 +321,9 @@ public class Ball implements Drawable, Movable {
      *     +当用户拖拽鼠标时 -> 计算球可能会被打击的位置,绘制虚线辅助线
      * 计算公式见高中物理必修1
      */
+
     public void registerMouseAction() {
+
         this.shape.setOnMousePressed(e -> {
             //球杆击中球采用这个
 //            dragRelativeX = e.getSceneX();
@@ -340,10 +354,15 @@ public class Ball implements Drawable, Movable {
                 this.DashLine.setEndX(this.shape.getCenterX() + Dx);
                 this.DashLine.setEndY(this.shape.getCenterY() + Dy);
                 this.DashLine.setVisible(true);
+
+                this.Dashshape.setVisible(true);
+                this.Dashshape.setCenterX(this.shape.getCenterX() + Dx);
+                this.Dashshape.setCenterY(this.shape.getCenterY() + Dy);
             }
         });
         this.shape.setOnMouseReleased(e -> {
             if(isStop()) {
+                this.Dashshape.setVisible(false);
                 double Vx = (this.shape.getCenterX() - e.getSceneX()) * hitScale;
                 double Vy = (this.shape.getCenterY() - e.getSceneY()) * hitScale;
                 double V  = Math.sqrt(Vx*Vx + Vy*Vy);
