@@ -126,9 +126,10 @@ public class Ball implements Drawable, Movable {
         this.Dashshape = new Circle(0,0,Radius);
         this.Dashshape.setStrokeType(StrokeType.CENTERED);
         this.Dashshape.setStrokeWidth(2);
-        this.Dashshape.getStrokeDashArray().addAll(5d, 10d); // 设置虚线样式
+        this.Dashshape.getStrokeDashArray().addAll(5d, 5d); // 设置虚线样式
+        this.Dashshape.setFill(Color.TRANSPARENT);
+        this.Dashshape.setStroke(Color.WHITE);
         this.Dashshape.setVisible(false);
-        this.Dashshape.setFill(Color.WHITE);
         group.add(this.Dashshape);
     }
     public void goBackToInitialPosition(){
